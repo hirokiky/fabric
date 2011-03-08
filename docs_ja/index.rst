@@ -25,14 +25,11 @@ Fabricは最新安定版使うことをお勧めします。
 :doc:`installation` にソースコードへのアクセス方法が書いてあります。
 
 
-Development
-===========
+開発
+====
 
-Any hackers interested in improving Fabric (or even users interested in how
-Fabric is put together or released) please see the :doc:`development` page. It
-contains comprehensive info on contributing, repository layout, our release
-strategy, and more.
-
+Fabricの改善に興味があるハッカー（またはFabricの使い方やリリース方法に興味があるユーザ）は、 :doc:`development` を見てください。
+寄与、レポジトリレイアウト、リリース戦略などについて全体的な情報が書いてあります。
 
 .. _documentation-index:
 
