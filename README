@@ -1,22 +1,16 @@
-Fabric is a Python (2.5 or higher) library and command-line tool for
-streamlining the use of SSH for application deployment or systems
-administration tasks.
+FabricはPython（2.5以上）のライブラリかつコマンドラインツールです。
+アプリケーション開発にSSHのストリームラインとして使ったり、システム管理作業に使えます。
 
-It provides a basic suite of operations for executing local or remote shell
-commands (normally or via ``sudo``) and uploading/downloading files, as well as
-auxiliary functionality such as prompting the running user for input, or
-aborting execution.
- 
-Typical use involves creating a Python module containing one or more functions,
-then executing them via the ``fab`` command-line tool. Below is a small but
-complete "fabfile" containing a single task::
+Fabricはローカルないしリモートのシェルコマンドを実行（普通にでも ``sudo`` 経由でも）、ファイルのアップロード／ダウンロード、実行ユーザに入力を促したり、実行を停止する補助機能などの基本的なツール群を提供します。
+
+典型的名使い方は1つ以上の関数を持つPythonモジュールを作成し、それらを ``fab`` コマンドラインツール経由で実行するというものです。次に示すのは1つのタスクを持った小さいけれど完全な"fabfile"です::
 
     from fabric.api import run
 
     def host_type():
         run('uname -s')
 
-Once a task is defined, it may be run on one or more servers, like so::
+タスクが定期がされたら、1つ以上のサーバで実行できます。たとえば::
 
     $ fab -H localhost,linuxbox host_type
     [localhost] run: uname -s
@@ -28,7 +22,5 @@ Once a task is defined, it may be run on one or more servers, like so::
     Disconnecting from localhost... done.
     Disconnecting from linuxbox... done.
 
-In addition to use via the ``fab`` tool, Fabric's components may be imported
-into other Python code, providing a Pythonic interface to the SSH protocol
-suite at a higher level than that provided by e.g. Paramiko (which
-Fabric itself leverages.)
+``fab`` ツール経由に加えて、Farbicコンポーネントは他のPythonコードからもimport可能です。
+SSHプロトコルツールに、たとえばParamiko（Fabric自体も使っています）から提供されるようなものよりさらに高レベルなPython的なインターフェースを提供する事もできます。
