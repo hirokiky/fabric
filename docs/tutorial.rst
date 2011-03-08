@@ -1,38 +1,36 @@
-=====================
-Overview and Tutorial
-=====================
+.. -*- coding: utf-8-unix -*-
 
-Welcome to Fabric!
+====================
+概要とチュートリアル
+====================
 
-This document is a whirlwind tour of Fabric's features and a quick guide to its
-use. Additional documentation (which is linked to throughout) can be found in
-the :ref:`usage documentation <usage-docs>` -- please make sure to check it out.
+Fabricへようこそ！
+
+このドキュメントはFabricの機能を巡る怒涛のツアーとその使い方のクイックガイドです。
+追加ドキュメント（いたるところにリンクを張りました）は :ref:`使い方 <usage-docs>` にあります。-- 必ず確認してください。
 
 
-What is Fabric?
+Fabricって何？
 ===============
 
-As the ``README`` says:
+``README`` にあるように:
 
     .. include:: ../README
         :end-before: It provides
 
-More specifically, Fabric is:
 
-* A tool that lets you execute **arbitrary Python functions** via the **command
-  line**;
-* A library of subroutines (built on top of a lower-level library) to make
-  executing shell commands over SSH **easy** and **Pythonic**.
+さらに特筆すべき点として、Fabricは:
 
-Naturally, most users combine these two things, using Fabric to write and
-execute Python functions, or **tasks**, to automate interactions with remote
-servers. Let's take a look.
+* **任意のPython関数** を **コマンドライン** 経由で実行できるツールです
+* サブルーチンのライブラリ(低レベルライブラリの上に構成されています)は **簡単** かつ **Pythonic** に SSH 経由でシェルコマンドを実行できるようにします
+
+当然のことながら、ほんどのユーザーは Python の関数や **タスク** を記述、実行したり、リモートサーバとの交信を自動化するために、上記 2 つの機能を組み合わせて Fabric を使用しています。以下に見ていきましょう。
 
 
 Hello, ``fab``
 ==============
 
-This wouldn't be a proper tutorial without "the usual"::
+"いつものやつ" が無いとチュートリアルになりませんよね::
 
     def hello():
         print("Hello world!")
