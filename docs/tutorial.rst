@@ -35,23 +35,18 @@ Hello, ``fab``
     def hello():
         print("Hello world!")
 
-Placed in a Python module file named ``fabfile.py``, that function can be
-executed with the ``fab`` tool (installed as part of Fabric) and does just what
-you'd expect::
+これを ``fabfile.py``x という Python モジュールファイルに保存すると、この関数を fab ツール(Fabric の一部としてインストールされます)から実行することができるようになり、期待した通りの結果が得られます::
 
     $ fab hello
     Hello world!
 
     Done.
 
-That's all there is to it. This functionality allows Fabric to be used as a
-(very) basic build tool even without importing any of its API.
+これでおしまいです。この機能によって、API をインポートしないでも (非常に)基本的なビルドツールとして Fabric を使用することができます。
 
 .. note::
 
-    The ``fab`` tool simply imports your fabfile and executes the function or
-    functions you instruct it to. There's nothing magic about it -- anything
-    you can do in a normal Python script can be done in a fabfile!
+   ``fab`` ツールは、単にあなたの fabfile をインポートして、その中で定義した関数(群)を実行します。これはマジックでもなんでもありません -- 通常の Python スクリプトでできることは、fabfile でもできるということです！
 
 .. seealso:: :ref:`execution-strategy`, :ref:`tasks-and-imports`, :doc:`usage/fab`
 
@@ -89,16 +84,12 @@ as lists. Future versions may add a typecasting system to make this easier.
 
 .. seealso:: :ref:`task-arguments`
 
-Local commands
-==============
+ローカルコマンド
+================
 
-As used above, ``fab`` only really saves a couple lines of
-``if __name__ == "__main__"`` boilerplate. It's mostly designed for use with
-Fabric's API, which contains functions (or **operations**) for executing shell
-commands, transferring files, and so forth.
+上で見たように ``fab`` では、お馴染の ``if __name__ == "__main__"`` の数行を、ただ単に保存しているだけです。このコマンドは主に、シェルコマンドの実行やファイル転送などの関数(や **操作** )を含む Fabric の API と合わせて使用するために設計されています。
 
-Let's build a hypothetical Web application fabfile. Fabfiles usually work best
-at the root of a project::
+それでは仮想の Web アプリケーション用 fabfile をビルドしてみましょう。通常 fabfile は、プロジェクトのルートに配置することをお勧めします::
 
     .
     |-- __init__.py
@@ -116,11 +107,9 @@ at the root of a project::
 
 .. note::
 
-    We're using a Django application here, but only as an example -- Fabric is
-    not tied to any external codebase, save for its SSH library.
+   ここでは Django アプリケーションを使っていますが、これはただの例でしかありません -- Fabric は自身の SSH ライブラリ以外には、どんな外部のコードベースにも依存していません。
 
-For starters, perhaps we want to run our tests and commit to our VCS so we're
-ready for a deploy::
+手始めに、テストを実行してアプリケーションのコピーをまとめれば、デプロイの準備が整うと思います::
 
     from fabric.api import local
 
@@ -128,7 +117,7 @@ ready for a deploy::
         local("./manage.py test my_app")
         local("git add -p && git commit")
 
-The output of which might look a bit like this::
+この処理の出力は、だいたい次のようになると思います::
 
     $ fab prepare_deploy
     [localhost] run: ./manage.py test my_app
@@ -148,19 +137,15 @@ The output of which might look a bit like this::
 
     Done.
 
-The code itself is straightforward: import a Fabric API function,
-`~fabric.operations.local`, and use it to run and interact with local shell
-commands. The rest of Fabric's API is similar -- it's all just Python.
+このコード自体はわかりやすいものでしょう: Fabric API 関数 `~fabric.operations.local` をインポートして、これを用いてローカルのシェルコマンドを実行します。他の Fabric API も同様で -- 全てただの Python コードです。
 
 .. seealso:: :doc:`api/core/operations`, :ref:`fabfile-discovery`
 
 
-Organize it your way
-====================
+自分の好きなように書く
+======================
 
-Because Fabric is "just Python" you're free to organize your fabfile any way
-you want. For example, it's often useful to start splitting things up into
-subtasks::
+Fabric は "ただの Python" なので、自分の好きなように fabfile を書くことができます。例えば、ひとつのタスクを複数のサブタスクに分割すると便利です::
 
     from fabric.api import local
 
@@ -174,19 +159,14 @@ subtasks::
         test()
         commit()
 
-The ``prepare_deploy`` task can be called just as before, but now you can make
-a more granular call to one of the sub-tasks, if desired.
+``prepare_deploy`` は以前と同じように呼び出すことができますが、今では、必要な場合には、サブタスクのひとつを実行させることもできます。
 
+失敗
+====
 
-Failure
-=======
+基本的なケースはうまく動作しましたが、テストが失敗した場合には何が起こるのでしょうか？おそらく、その時点で処理を止めて、デプロイ前に失敗した箇所を修正したいと思うでしょう。
 
-Our base case works fine now, but what happens if our tests fail?  Chances are
-we want to put on the brakes and fix them before deploying.
-
-Fabric checks the return value of programs called via operations and will abort
-if they didn't exit cleanly. Let's see what happens if one of our tests
-encounters an error::
+Fabric は操作によって呼ばれたプログラムの返り値をチェックして、正常に終了しなかった場合は処理を終了します。テストのひとつがエラーだった場合に何が起こるか見てみましょう::
 
     $ fab prepare_deploy
     [localhost] run: ./manage.py test my_app
@@ -210,21 +190,16 @@ encounters an error::
 
     Aborting.
 
-Great! We didn't have to do anything ourselves: Fabric detected the failure and
-aborted, never running the ``commit`` task.
+素晴しい！自分達は何もする必要がありませんでした: Fabric が失敗を検知して処理を中断するので ``commit`` タスクは実行されません。
 
 .. seealso:: :ref:`Failure handling (usage documentation) <failures>`
 
-Failure handling
-----------------
+失敗時のハンドリング
+--------------------
 
-But what if we wanted to be flexible and give the user a choice? A setting
-(or **environment variable**, usually shortened to **env var**) called
-:ref:`warn_only` lets you turn aborts into warnings, allowing flexible error
-handling to occur.
+しかし、より柔軟にして、ユーザーに選択をさせたい場合はどうするのでしょうか？ :ref:`warn_only` という設定(もしくは **環境変数** 、通常は **env var** と略される)で、処理の中断を警告表示にさせ、柔軟なエラーハンドリングができるようになります。
 
-Let's flip this setting on for our ``test`` function, and then inspect the
-result of the `~fabric.operations.local` call ourselves::
+それでは ``test`` 関数でこの設定を有効にして、 `~fabric.operations.local` 呼び出しの結果を検査してみましょう::
 
     from __future__ import with_statement
     from fabric.api import local, settings, abort
@@ -238,25 +213,20 @@ result of the `~fabric.operations.local` call ourselves::
 
     [...]
 
-In adding this new feature we've introduced a number of new things:
+新機能の追加にあたって、新しい事柄をいくつかご紹介します。
 
-* The ``__future__`` import required to use ``with:`` in Python 2.5;
-* Fabric's `contrib.console <fabric.contrib.console>` submodule, containing the
-  `~fabric.contrib.console.confirm` function, used for simple yes/no prompts;
-* The `~fabric.context_managers.settings` context manager, used to apply
-  settings to a specific block of code;
-* Command-running operations like `~fabric.operations.local` can return objects
-  containing info about their result (such as ``.failed``, or
-  ``.return_code``);
-* And the `~fabric.utils.abort` function, used to manually abort execution.
+* Python 2.5 において ``with：`` を使うには ``__future__`` をインポートする必要があります。
+* `~fabric.contrib.console.confirm` 関数を含む Fabric の `contrib.console <fabric.contrib.console>` サブモジュールは、シンプルな yes/no プロンプト処理に使用されます。
+* `~fabric.context_managers.settings` コンテクストマネージャは、特定のコードブロックへの設定反映に使用されます。
+* `~fabric.operations.local` のようなコマンド実行処理は、(``.failed`` や ``.return_code`` のような)実行結果情報を持ったオブジェクトを返します。
+* `~fabric.utils.abort` 関数は、手動での中断処理実行に使用されます。
 
-However, despite the additional complexity, it's still pretty easy to follow,
-and is now much more flexible.
+しかしながら、追加した機能の複雑さにもかかわらず、その処理を辿るのはまだ非常に簡単で、現在では、はるかに柔軟性に富んでいます。
 
 .. seealso:: :doc:`api/core/context_managers`, :ref:`env-vars`
 
 
-Making connections
+コネクションの作成
 ==================
 
 Let's start wrapping up our fabfile by putting in the keystone: a ``deploy``
@@ -361,8 +331,8 @@ Notice the ``Password:`` prompt -- that was our remote ``git`` call on our Web s
 
 .. _defining-connections:
 
-Defining connections beforehand
--------------------------------
+あらかじめコネクションを定義する
+--------------------------------
 
 Specifying connection info at runtime gets old real fast, so Fabric provides a
 handful of ways to do it in your fabfile or on the command line. We won't cover
@@ -394,8 +364,8 @@ task once for each connection.
 .. seealso:: :doc:`usage/env`, :ref:`host-lists`
 
 
-Conclusion
-==========
+おわりに
+========
 
 Our completed fabfile is still pretty short, as such things go. Here it is in
 its entirety::
