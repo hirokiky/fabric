@@ -131,51 +131,49 @@ Core APIは小さく、比較的変更が少ないままでありつづけよう
 ヘルプ
 ======
 
-If you've scoured the :ref:`prose <usage-docs>` and :ref:`API <api_docs>`
-documentation and still can't find an answer to your question, below are
-various support resources that should help. We do request that you do at least
-skim the documentation before posting tickets or mailing list questions,
-however!
+もし :ref:`prose <usage-docs>` や :ref:`API <api_docs>` にあるドキュメントを読み漁ってみて、もし解決策がみつからなかったら、次のいくつかあるサポート先を見てください。
+しかし、チケットを切ったりメーリングリストに投稿する前に、少なくともドキュメントに目は通してください！
 
-Mailing list
-------------
+メーリングリスト
+----------------
 
-The best way to get help with using Fabric is via the `fab-user mailing list
-<http://lists.nongnu.org/mailman/listinfo/fab-user>`_ (currently hosted at
-``nongnu.org``.) The Fabric developers do their best to reply promptly, and the
-list contains an active community of other Fabric users and contributors as
-well.
+Fabricの使っていて助けが必要な場合には `fab-user mailing list 
+<http://lists.nongnu.org/mailman/listinfo/fab-user>`_ に聞くのが最適です。
+（いまは ``nongnu.org`` でホスティングされています）
+Fabficの開発者はできる限り速く返信します。
+メーリングリストにはFabricユーザのアクティブなコミュニティやコントリビュータも参加しています。
 
 Twitter
 -------
 
-Fabric has an official Twitter account, `@pyfabric
-<http://twitter.com/pyfabric>`_, which is used for announcements and occasional
-related news tidbits (e.g. "Hey, check out this neat article on Fabric!").
+Fabricには公式Twitterアカウントがあります。
+`@pyfabric <http://twitter.com/pyfabric>`_ です。
+Twitterではアナウンスとちょっとしたニュースをお届けします。
+（「やあ、このFabricについての記事はかなりいい感じだよ！」みたいな感じ）
 
 .. _bugs:
 
-Bugs/ticket tracker
--------------------
+バグ／チケットトラッカー
+------------------------
 
-To file new bugs or search existing ones, you may visit Fabric's `Redmine
-<http://redmine.org>`_ instance, located at `code.fabfile.org
-<http://code.fabfile.org>`_. Due to issues with spam, you'll need to (quickly
-and painlessly) register an account in order to post new tickets.
+新しいバグを登録したり、既存のバグを検索するには、Fabricの `Redmine 
+<http://redmine.org>`_ インスタンスを確認してください。
+場所は `code.fabfile.org <http://code.fabfile.org>`_ です。
+スパム対策のため、新しいチケットを投稿するにはアカウント登録が必要です。
+（すぐにできます）
 
 IRC
 ---
 
-We maintain a semi-official IRC channel at ``#fabric`` on Freenode
-(``irc://irc.freenode.net``) where the developers and other users may be found.
-As always with IRC, we can't promise immediate responses, but some folks keep
-logs of the channel and will try to get back to you when they can.
+準公式のIRCチャンネルも管理しています。
+Freenode(``irc://irc.freenode.net``)で ``#fabric`` にいけば、開発者やユーザがいると思います。
+IRCでは毎度のことですが、すぐに返信出来るとは限りません。
+しかし誰かしらチャンネルのログを取ってくれていて、返信出きるときに知れくれるとおもいます。
 
 Wiki
 ----
 
-There is an official Fabric `MoinMoin <http://moinmo.in>`_ wiki reachable at
-`wiki.fabfile.org <http://wiki.fabfile.org>`_, although as of this writing its
-usage patterns are still being worked out. Like the ticket tracker, spam has
-forced us to put anti-spam measures up: the wiki has a simple, easy captcha in
-place on the edit form.
+Fabricの公式Wikiは `MoinMoin <http://moinmo.in>`_ にあります。
+`wiki.fabfile.org <http://wiki.fabfile.org>`_ にアクセスしてみてください。
+これを書いている今も、Fabricの使い方が練られています。
+チケットトラッカーと同様に、スパム対策として編集フォームに簡単なcaptchaがあります。
