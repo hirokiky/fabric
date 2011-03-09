@@ -1,96 +1,90 @@
-============
-Installation
-============
+.. -*- coding: utf-8-unix -*-
 
-Fabric is best installed via `pip <http://pip.openplans.org>`_ (highly
-recommended) or `easy_install
-<http://wiki.python.org/moin/CheeseShopTutorial>`_ (older, but still works
-fine). You may also opt to use your operating system's package manager (the
-package is typically called ``fabric`` or ``python-fabric``), or execute
-``python setup.py install`` inside a :ref:`downloaded <downloads>` or
-:ref:`cloned <source-code-checkouts>` copy of the source code.
+==============
+ インストール
+==============
 
+Fabricのインストールは pip_ （強く推奨） または `easy_install`_ （古いが安定している）で行うのが最善です。
+あるいはOSのパッケージマネージャを使ってインストールするのもよいでしょう。
+（パッケージ名は ``fabric`` または ``python-fabric`` となっているのが通例です）
+また ``python setup.py install`` を :ref:`ダウンロードした <downloads>` り、 :ref:`クローン <source-code-checkouts>` したソースコード内で実行するのもよいでしょう。
 
-Dependencies
-============
+.. _pip: http://pip.openplans.org
+.. _`easy_install`: http://wiki.python.org/moin/CheeseShopTutorial
 
-In order for Fabric's installation to succeed, you will need four primary pieces of software:
+依存環境
+========
 
-* the Python programming language;
-* the ``setuptools`` packaging/installation library;
-* the PyCrypto cryptography library;
-* and the Paramiko SSH2 library.
+Fabricのインストールをするには、主に4つのソフトウェアが必要になります:
 
-Please read on for important details on each dependency -- there are a few
-gotchas.
+* プログラミング言語 Python
+* ``setuptools`` パッケージ／インストールライブラリ
+* PyCrypto 暗号化ライブラリ
+* Paramiko SSH2ライブラリ
+
+各要件に関する詳細に関しては読み進めてください。
 
 Python
 ------
 
-Fabric requires `Python <http://python.org>`_ version 2.5 or 2.6. Some caveats
-and notes about other Python versions:
+Fabricには Python_ のバージョン2.5か2.6が必要です。
+他のバージョンのPythonに関していくつか注意があります:
 
-* We are not planning on supporting **Python 2.4** given its age and the number
-  of useful tools in Python 2.5 such as context managers and new modules.
-  That said, the actual amount of 2.5-specific functionality is not
-  prohibitively large, and we would link to -- but not support -- a third-party
-  2.4-compatible fork. (No such fork exists at this time, to our knowledge.)
-* Fabric has not yet been tested on **Python 3.x** and is thus likely to be
-  incompatible with that line of development. However, we try to be at least
-  somewhat forward-looking (e.g. using ``print()`` instead of ``print``) and
-  will definitely be porting to 3.x in the future once our dependencies do.
+* **Python 2.4** のサポートは想定していません。
+  理由は2.4が古いというのと、コンテキストマネージャや新しいモジュールなど多くの便利ツールがPython 2.5で書かれているからです。
+  そうは言っても、実際にPython 2.5特有の機能がひどく多いというわけではありません。
+  サードパーティのPython 2.4互換のforkにリンクをしています。 -- サポートは保証しませんが
+* Fabricは **Python 3.x** 環境ではまだテストされていません。
+  したがって、開発中のものとは互換性がありません。
+  しかしながら少なくとも今後対応しようとはしていて（たとえば ``print`` の代わりに ``print()`` を使う）、依存ライブラリが対応すれば必ず3.xにポーティングします。
+
+.. _Python: http://python.org
 
 setuptools
 ----------
 
-`Setuptools`_ comes with some Python installations by default; if yours doesn't,
-you'll need to grab it. In such situations it's typically packaged as
-``python-setuptools``, ``py25-setuptools`` or similar. Fabric may drop its
-setuptools dependency in the future, or include alternative support for the
-`Distribute`_ project, but for now setuptools is required for installation.
+`setuptools`_ はPythonのインストール時に着いてきます。
+もしなければ持ってこなければいけません。そのような場合には ``python-setuptools``, ``py25-setuptools`` みたいな名前のパッケージを持ってくることになります。
+Fabricは将来的にはsetuptoolsや `distribute`_ プロジェクトへの依存を辞めるでしょうが、いまのところはsetuptoolsはインストールに必要です。
 
 .. _setuptools: http://pypi.python.org/pypi/setuptools
-.. _Distribute: http://pypi.python.org/pypi/distribute
+.. _distribute: http://pypi.python.org/pypi/distribute
 
 PyCrypto
 --------
 
-`PyCrypto <http://www.amk.ca/python/code/crypto.html>`_ is a dependency of
-Paramiko which provides the low-level (C-based) encryption algorithms used to
-run SSH. There are a couple gotchas associated with installing PyCrypto: its
-compatibility with Python's package tools, and the fact that it is a C-based
-extension.
+PyCrypto_ はParamikoが依存しているもので、ParamikoはSSHを実行するために低レベル（Cベースの）暗号化アルゴリズムを提供しています。
+PyCryptoをインストールに際して関連事項がいくつかあります。Pythonパッケージツールとの互換性やC拡張であること自体がそれです。
+
+.. _PyCrypto: http://www.amk.ca/python/code/crypto.html
 
 .. _pycrypto-and-pip:
 
-Package tools
-~~~~~~~~~~~~~
+パッケージツール
+~~~~~~~~~~~~~~~~
 
-We strongly recommend using ``pip`` to install Fabric as it is newer and
-generally better than ``easy_install``. However, a combination of bugs in
-specific versions of Python, ``pip`` and PyCrypto can prevent installation of
-PyCrypto. Specifically:
+Fabricのインストールには ``pip`` を使うことを強く推奨します。
+その理由としては新しいからということと、 ``easy_install`` よりも一般的に良いからということからです。
+しかしながら、Pythonの特定のバージョンでは複数のバグがあり、 ``pip`` と PyCryptoがPyCrypto自身のインストールを妨げる可能性があります。特に以下の場合は注意してください:
 
 * Python = 2.5.x
 * PyCrypto >= 2.1
 * ``pip`` < 0.8.1
 
-When all three criteria are met, you may encounter ``No such file or
-directory`` IOErrors when trying to ``pip install Fabric`` or ``pip install
-PyCrypto``.
+これらが合致する場合に、 ``pip install Fabric`` や ``pip install PyCrypto`` をしようとすると ``No such file or directory`` というIOErrorに遭遇します。
 
-The fix is simply to make sure at least one of the above criteria is not met,
-by doing the following (in order of preference):
+これを直すには、単純に上の条件に一つでも当てはまらないようにすればよいだけです。
+次の方法を試してください（優先順位が高い順に）:
 
-* Upgrade to ``pip`` 0.8.1 or above, e.g. by running ``pip install -U pip``.
-* Explicitly install PyCrypto 2.0.1 (which is the latest version known to work with
-  Fabric which does not cause the installation problem) via ``pip install
-  PyCrypto==2.0.1``.
-* Upgrade to Python 2.6 or above.
+* ``pip`` 0.8.1以上にアップグレードする。（ ``pip install -U pip`` を実行するなど）
+* ``pip install PyCrypto==2.0.1`` として明示的にPyCrypto 2.0.1をインストールする。
+  （このバージョンがFabricが問題なく動作して、インストールで問題が起きない最新バージョン）
+* Python 2.6以上にアップグレードする
 
+C拡張
+~~~~~
 
-C extension
-~~~~~~~~~~~
+DebianのaptレポジトリやRedHatのRPMなどコンパイル済みソースからインストールしている、あるいは :ref:`pypm <pypm>` を使っているのでなければ、PyCryptoをインストールするのにPythonのC拡張モジュールをソースからビルド出来る力も必要です。
 
 Unless you are installing from a precompiled source such as a Debian apt
 repository or RedHat RPM, or using :ref:`pypm <pypm>`, you will also need the
@@ -112,8 +106,8 @@ precompiled Win32 PyCrypto package from `voidspace's Python modules page
     In this scenario, you'll probably need to compile ``winrandom`` yourself
     via e.g. MS Visual Studio.  See :issue:`194` for info.
 
-Development dependencies
-------------------------
+開発依存環境
+------------
 
 If you are interested in doing development work on Fabric (or even just running
 the test suite), you may also need to install some or all of the following
@@ -137,8 +131,8 @@ install -r requirements.txt``.
 
 .. _downloads:
 
-Downloads
-=========
+ダウンロード
+============
 
 To obtain a tar.gz or zip archive of the Fabric source code, you may visit
 either of the following locations:
@@ -162,8 +156,8 @@ either of the following locations:
 
 .. _source-code-checkouts:
 
-Source code checkouts
-=====================
+ソースコードのチェックアウト
+============================
 
 The Fabric developers manage the project's source code with the `Git
 <http://git-scm.com>`_ DVCS. To follow Fabric's development via Git instead of
@@ -193,8 +187,8 @@ branches may be of interest and how you can help out, please see the
 
 .. _pypm:
 
-ActivePython and PyPM
-=====================
+ActivePythonとPyPM
+==================
 
 Windows users who already have ActiveState's `ActivePython
 <http://www.activestate.com/activepython>`_ distribution installed may find
