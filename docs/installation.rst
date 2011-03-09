@@ -85,46 +85,39 @@ C拡張
 ~~~~~
 
 DebianのaptレポジトリやRedHatのRPMなどコンパイル済みソースからインストールしている、あるいは :ref:`pypm <pypm>` を使っているのでなければ、PyCryptoをインストールするのにPythonのC拡張モジュールをソースからビルド出来る力も必要です。
+UbuntuやMac OS Xのような **Unixベースプラットフォーム** のユーザは、よく ``python-dev`` あるいはその類のPython開発ライブラリと、典型的なCビルドツールチェーンが必要です。（たとえばMacでは開発者ツール／XCodeツール、UbuntuやDebian Linuxでは ``build-essential`` パッケージ -- 基本的には ``gcc``, ``make`` などのすべて）
 
-Unless you are installing from a precompiled source such as a Debian apt
-repository or RedHat RPM, or using :ref:`pypm <pypm>`, you will also need the
-ability to build Python C-based modules from source in order to install
-PyCrypto. Users on **Unix-based platforms** such as Ubuntu or Mac OS X will
-need the traditional C build toolchain installed (e.g. Developer Tools / XCode
-Tools on the Mac, or the ``build-essential`` package on Ubuntu or Debian Linux
--- basically, anything with ``gcc``, ``make`` and so forth) as well as the
-Python development libraries, often named ``python-dev`` or similar.
+**Windows** ユーザは :ref:`pypm` を使って、 Cygwin_ のようなC開発環境をインストールする、あるいは `voidspaceのPythonモジュールページ <http://www.voidspace.org.uk/python/modules.shtml#pycrypto>`_ からコンパイル済みWin32 PyCryptoパッケージを取得することをおすすめします。
 
-For **Windows** users we recommend using :ref:`pypm`, installing a C
-development environment such as `Cygwin <http://cygwin.com>`_ or obtaining a
-precompiled Win32 PyCrypto package from `voidspace's Python modules page
-<http://www.voidspace.org.uk/python/modules.shtml#pycrypto>`_.
+.. _Cygwin: http://cygwin.com
 
 .. note::
-    Some Windows users whose Python is 64-bit have found that the PyCrypto
-    dependency ``winrandom`` may not install properly, leading to ImportErrors.
-    In this scenario, you'll probably need to compile ``winrandom`` yourself
-    via e.g. MS Visual Studio.  See :issue:`194` for info.
+
+   Pythonが64bit環境なWindowsユーザでは、PyCryptoが依存している ``winrandom`` が適切にインストールされず、ImportErrorになることかもしれません。
+   この場合、MS Visual Studioなどを使って ``winrandom`` を自分自身でコンパイル必要が出てきます。
+   :issue:`194` にその情報があるので確認してください。
 
 開発依存環境
 ------------
 
-If you are interested in doing development work on Fabric (or even just running
-the test suite), you may also need to install some or all of the following
-packages:
+Fabricの開発に興味がある人（あるいはテストをするだけでも）は下記のパッケージもインストールする筆王があります:
 
-* `git <http://git-scm.com>`_ and `Mercurial`_, in order to obtain some of the
-  other dependencies below;
-* `Nose <http://code.google.com/p/python-nose/>`_
-* `Coverage <http://nedbatchelder.com/code/modules/coverage.html>`_
-* `PyLint <http://www.logilab.org/857>`_
-* `Fudge <http://farmdev.com/projects/fudge/index.html>`_
-* `Sphinx <http://sphinx.pocoo.org/>`_
+* 下記の依存パッケージを素得するために git_ が Mercurial_ が必要です
+* Nose_
+* Coverage_
+* PyLint_
+* Fudge_
+* Sphinx_
 
-For an up-to-date list of exact testing/development requirements, including
-version numbers, please see the ``requirements.txt`` file included with the
-source distribution. This file is intended to be used with ``pip``, e.g. ``pip
-install -r requirements.txt``.
+.. _git: http://git-scm.com
+.. _Nose: http://code.google.com/p/python-nose/
+.. _Coverage: http://nedbatchelder.com/code/modules/coverage.html
+.. _PyLint: http://www.logilab.org/857
+.. _Fudge: http://farmdev.com/projects/fudge/index.html
+.. _Sphinx: http://sphinx.pocoo.org/
+
+バージョン番号を含めて、最新のテスト／開発要件のリストを知りたい場合は、ソースにある ``requirements.txt`` ファイルを参照してください。
+このファイルは ``pip`` で ``pip install -r requirements.txt`` として使うためにあるものです。
 
 .. _Mercurial: http://mercurial.selenic.com/wiki/
 
@@ -134,8 +127,7 @@ install -r requirements.txt``.
 ダウンロード
 ============
 
-To obtain a tar.gz or zip archive of the Fabric source code, you may visit
-either of the following locations:
+Fabricのソースコードをtar.gzやzipアーカイブで取得するには、次のサイトをどれかを確認してみてください:
 
 * The official downloads are located in Fabric's Redmine instance at
   http://code.fabfile.org/projects/fabric/files/. This is the spot you want
