@@ -51,36 +51,33 @@ Hello, ``fab``
 .. seealso:: :ref:`execution-strategy`, :ref:`tasks-and-imports`, :doc:`usage/fab`
 
 
-Task arguments
-==============
+タスク引数
+==========
 
-It's often useful to pass runtime parameters into your tasks, just as you might
-during regular Python programming. Fabric has basic support for this using a
-shell-compatible notation: ``<task name>:<arg>,<kwarg>=<value>,...``. It's
-contrived, but let's extend the above example to say hello to you personally::
+ちょうど普通にPythonプログラミングをしているときみたいに、タスクに実行時パラメータを渡すと割と便利です。
+Fabricにはシェル互換の記法でこれをサポートしています: ``<task name>:<arg>,<kwarg>=<value>,...``
+不自然な例ではありますが、さきほどの例を拡張して、あなたにhelloと言わせてみましょう::
 
     def hello(name="world"):
         print("Hello %s!" % name)
 
-By default, calling ``fab hello`` will still behave as it did before; but now
-we can personalize it::
+デフォルトでは、 ``fab hello`` をすると拡張前と同じように動作します。
+しかし今の拡張でパーソナライズできます::
 
     $ fab hello:name=Jeff
     Hello Jeff!
 
     Done.
 
-Those already used to programming in Python might have guessed that this
-invocation behaves exactly the same way::
+引数呼び出しは、Pythonでのプログラミングで既に行われているように推測されます::
 
     $ fab hello:Jeff
     Hello Jeff!
 
     Done.
 
-For the time being, your argument values will always show up in Python as
-strings and may require a bit of string manipulation for complex types such
-as lists. Future versions may add a typecasting system to make this easier.
+当面は引数はPythonの中では常に文字列として扱われ、リストのような複雑な型に対しては文字列操作などが必要になってくると思います。
+今後のバージョンでは型キャストシステムを導入して、こういった操作を簡単に出来るようにしようと思っています。
 
 .. seealso:: :ref:`task-arguments`
 
@@ -229,8 +226,7 @@ Fabric は操作によって呼ばれたプログラムの返り値をチェッ�
 コネクションの作成
 ==================
 
-Let's start wrapping up our fabfile by putting in the keystone: a ``deploy``
-task that ensures the code on our server is up to date::
+fabfileに要石を置いてラップしてみましょう: ``deploy`` タスクはサーバ上のコードが最新かを確認するタスクです::
 
     def deploy():
         code_dir = '/srv/django/myproject'
@@ -238,22 +234,19 @@ task that ensures the code on our server is up to date::
             run("git pull")
             run("touch app.wsgi")
 
-Here again, we introduce a handful of new concepts:
+ここで再度、いくつか新しい概念をご紹介します:
 
-* Fabric is just Python -- so we can make liberal use of regular Python code
-  constructs such as variables and string interpolation;
-* `~fabric.context_managers.cd`, an easy way of prefixing commands with a
-  ``cd /to/some/directory`` call.
-* `~fabric.operations.run`, which is similar to `~fabric.operations.local` but
-  runs remotely instead of locally.
+* FabricはただのPythonです -- だから普通の変数は文字列が挿入されたPythonコードを自由に使うことが出来ます
+* `~fabric.context_managers.cd` で簡単にコマンドの前に ``cd /to/some/directory`` を呼び出すことが出来ます
+* `~fabric.operations.run` は `~fabric.operations.local` に似ていますが、ローカルではなくリモートの操作が出来ます。 which is similar to  but
 
-We also need to make sure we import the new functions at the top of our file::
+またファイルの戦闘で新しい関数をimportする必要があることに注意してください::
 
     from __future__ import with_statement
     from fabric.api import local, settings, abort, run, cd
     from fabric.contrib.console import confirm
 
-With these changes in place, let's deploy::
+これらの変更を踏まえたうえで、デプロイしてみましょう::
 
     $ fab deploy
     No hosts found. Please specify (single) host string for connection: my_server
@@ -264,18 +257,16 @@ With these changes in place, let's deploy::
 
     Done.
 
-We never specified any connection info in our fabfile, so Fabric prompted us at
-runtime. Connection definitions use SSH-like "host strings" (e.g.
-``user@host:port``) and will use your local username as a default -- so in this
-example, we just had to specify the hostname, ``my_server``.
+fabfileに接続情報をまったく与えていないので、Fabricは実行時に確認してきます。
+接続先の定義はSSHに似た"ホスト文字列"(``user@host:port``) を使います。
+ローカルユーザ名をデフォルトで使います -- この例ではホスト名 ``my_server`` だけを指定する必要があります。
 
 
-Remote interactivity
---------------------
+リモートインタラクティビティ
+----------------------------
 
-``git pull`` works fine if you've already got a checkout of your source code --
-but what if this is the first deploy? It'd be nice to handle that case too and
-do the initial ``git clone``::
+ソースコードをチェックアウト済みだった場合に ``git pull`` はうまく動作します --
+しかし最初のデプロイではどうでしょうか。このケースを扱うのよさそうなので、最初の ``git clone`` をしてみましょう::
 
     def deploy():
         code_dir = '/srv/django/myproject'
@@ -286,21 +277,18 @@ do the initial ``git clone``::
             run("git pull")
             run("touch app.wsgi")
 
-As with our calls to `~fabric.operations.local` above, `~fabric.operations.run`
-also lets us construct clean Python-level logic based on executed shell
-commands. However, the interesting part here is the ``git clone`` call: since
-we're using Git's SSH method of accessing the repository on our Git server,
-this means our remote `~fabric.operations.run` call will need to authenticate
-itself.
+上の例で `~fabric.operations.local` を使って呼んだように `~fabric.operations.run`
+でも綺麗にシェルコマンドに基づいたPythonレベルでのロジックを書いてみましょう。
+しかしながら、ここで面白いのは ``git clone`` の呼び出しの部分です:
+ここではGitサーバにレポジトリにアクセスするのにGitのSSHメソッドを使っているので、
+リモートの `~fabric.operations.run` 自体にも認証が必要になります。
 
-Older versions of Fabric (and similar high level SSH libraries) run remote
-programs in limbo, unable to be touched from the local end. This is
-problematic when you have a serious need to enter passwords or otherwise
-interact with the remote program.
+Fabricの過去バージョン（と同様の高レベルSSHライブラリ）ではリモートプログラムをlimboを使って実行していました。
+limboではローカル端末から触ることが出来ませんでした。
+これはリモートプログラムに対してパスワードの入力等のインタラクティブな操作が重要な場合に問題があります。
 
-Fabric 1.0 and later breaks down this wall and ensures you can always talk to
-the other side. Let's see what happens when we run our updated ``deploy`` task
-on a new server with no Git checkout::
+Fabric 1.0以降ではこの壁を取っ払い、いつもリモートに話しかけることが出きるようになりました。
+では更新した ``deploy`` タスクをGitチェックアウトをしていない新しいサーバ上で実行したらで何が起きるか見てみましょう::
 
     $ fab deploy
     No hosts found. Please specify (single) host string for connection: my_server
@@ -324,7 +312,8 @@ on a new server with no Git checkout::
 
     Done.
 
-Notice the ``Password:`` prompt -- that was our remote ``git`` call on our Web server, asking for the password to the Git server. We were able to type it in and the clone continued normally.
+``Password`` プロンプトに注目してください -- これはWebサーバ上でのリモートが ``git`` の呼び出しによるもので、Gitサーバへのパスワードを訊いているところです。
+これでパスワードをタイプして、普通にcloneを続けられます。
 
 .. seealso:: :doc:`/usage/interactivity`
 
@@ -334,15 +323,13 @@ Notice the ``Password:`` prompt -- that was our remote ``git`` call on our Web s
 あらかじめコネクションを定義する
 --------------------------------
 
-Specifying connection info at runtime gets old real fast, so Fabric provides a
-handful of ways to do it in your fabfile or on the command line. We won't cover
-all of them here, but we will show you the most common one: setting the global
-host list, :ref:`env.hosts <hosts>`.
+実行時に接続先を指定する方法はすぐにすたれてしまうので、Fabricではfabfileかコマンドラインにそれを指定する方法をいくつか帝京しています。
+ここではすべてのやり方には降れませんが、もっとも一般的なやり方を紹介します:
+グローバルホストリスト :ref:`env.hosts <hosts>` を設定します。
 
-:doc:`env <usage/env>` is a global dictionary-like object driving many of
-Fabric's settings, and can be written to with attributes as well (in fact,
-`~fabric.context_managers.settings`, seen above, is simply a wrapper for this.)
-Thus, we can modify it at module level near the top of our fabfile like so::
+:doc:`env <usage/env>` はグローバルな辞書のようなオブジェクトで、Fabricの設定から値を引っ張ってくることもできるし、属性を指定して書くこともできます。
+（実際上で見たように `~fabric.context_managers.settings` はこれの単純なラッパです）
+これでfabfileの先頭でモジュールレベルで変更することが出来ます::
 
     from __future__ import with_statement
     from fabric.api import *
@@ -353,13 +340,11 @@ Thus, we can modify it at module level near the top of our fabfile like so::
     def test():
         do_test_stuff()
 
-When ``fab`` loads up our fabfile, our modification of ``env`` will execute,
-storing our settings change. The end result is exactly as above: our ``deploy``
-task will run against the ``my_server`` server.
+``fab`` がfabfileを読み込むときに、 ``env`` の修正の部分が実行されて、設定変更が反映されます。
+最終結果は上のコードのようになります: ``deploy`` タスクは ``my_server`` に対して実行します。
 
-This is also how you can tell Fabric to run on multiple remote systems at once:
-because ``env.hosts`` is a list, ``fab`` iterates over it, calling the given
-task once for each connection.
+この方法で一度に複数のリモートシステムに接続する際にどのマシンで実行するかFabricに伝える事ができます:
+``env.hosts`` はリストなので、 ``fab`` はリストに指定されているマシンに1つずつ接続してタスク実行していきます。
 
 .. seealso:: :doc:`usage/env`, :ref:`host-lists`
 
@@ -367,8 +352,8 @@ task once for each connection.
 おわりに
 ========
 
-Our completed fabfile is still pretty short, as such things go. Here it is in
-its entirety::
+完成したfabfileはまだかなり短いですが、動作はします。
+ここにできたプログラムの全体像を見せます::
 
     from __future__ import with_statement
     from fabric.api import *
@@ -395,16 +380,16 @@ its entirety::
             run('tar xzf /tmp/my_project.tgz')
             run('touch app.wsgi')
 
-This fabfile makes use of a large portion of Fabric's feature set:
+このfabfileはFabricの機能をふんだんに利用しています:
 
-* defining fabfile tasks and running them with :doc:`fab <usage/fab>`;
-* calling local shell commands with `~fabric.operations.local`;
-* modifying env vars with `~fabric.context_managers.settings`;
-* handling command failures, prompting the user, and manually aborting;
-* and defining host lists and `~fabric.operations.run`-ning remote commands.
+* fabfileタスクを定義して :doc:`fab <usage/fab>` で実行しています
+* ローカルのシェルコマンドを `~fabric.operations.local` を使って呼び出します
+* `~fabric.context_managers.settings` を使ってenv varsを変更します
+* コマンドが失敗した時の処理をしたり、ユーザにプロンプトを出したり、手動で停止したりできます
+* そしてホストのリストを定義して、リモートコマンドを `~fabric.operations.run` で実行できます
 
-However, there's still a lot more we haven't covered here! Please make sure you
-follow the various "see also" links, and check out the documentation table of
-contents on :ref:`the main index page <documentation-index>`.
+しかしながら、ここで紹介してないことがもっとたくさんあります！
+いくつも挙げた"see also"のリンクをぜひ見てみてください。
+そして :ref:`表紙のページ <documentation-index>` にあるドキュメントを見てください。
 
-Thanks for reading!
+読んでくれてありがとうございました！
