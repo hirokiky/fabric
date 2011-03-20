@@ -129,63 +129,46 @@ Fabricの開発に興味がある人（あるいはテストをするだけで�
 
 Fabricのソースコードをtar.gzやzipアーカイブで取得するには、次のサイトをどれかを確認してみてください:
 
-* The official downloads are located in Fabric's Redmine instance at
-  http://code.fabfile.org/projects/fabric/files/. This is the spot you want
-  to download from for operating system packages, as the only changing part of
-  the URL will be the filename itself and the md5 hashes will be consistent.
-* Our `Git repository viewer <http://git.fabfile.org>`_ provides downloads of
-  all tagged releases. See the "Download" column, next to the "Tag" column in
-  the middle of the front page. Please note that due to how cgit generates tag
-  archives, the md5 sums will change over time, so use of this location for
-  package downloads is not recommended.
-* `Our GitHub mirror <http://github.com/bitprophet/fabric>`_ also has downloads
-  of all tagged releases -- just click the 'Download' button near the top of
-  the main page.
-* `Fabric's PyPI page <http://pypi.python.org/pypi/Fabric>`_ offers manual
-  downloads in addition to being the entry point for ``pip`` and
-  ``easy-install``.
-
-
+* 公式ダウンロードはFabricのRedmineインスタンスを確認して下さい。
+  ( http://code.fabfile.org/projects/fabric/files/ )
+  ここからOS毎のパッケージをダウンロードできます。
+  上記URLで変更がある場所はファイル名だけで、md5ハッシュ値は変更ありません。
+* `Gitレポジトリビューワ <http://git.fabfile.org>`_ ではタグが打たれたリリースがダウンロード出来ます。
+  "Download"カラムをクリックして、最初のページの真ん中にある"Tag"カラムをクリックしてください。
+  cgitのタグアーカイブの生成方法によって、md5値がいつも変化するので、ここからダウンロードすることは推奨されていないことに注意してください。
+* `GitHubのミラー <http://github.com/bitprophet/fabric>`_ でもタグが打たれたリリースをダウンロード出来ます。
+  -- 最初のページの上の方にある'Download'ボタンをクリックするだけです。
+* `FabricのPyPIページ <http://pypi.python.org/pypi/Fabric>`_ では ``pip`` や ``easy_install`` のエントリーポイントに加えてマニュアルのダウンロードも出来るようになっています。
+  
 .. _source-code-checkouts:
 
 ソースコードのチェックアウト
 ============================
 
-The Fabric developers manage the project's source code with the `Git
-<http://git-scm.com>`_ DVCS. To follow Fabric's development via Git instead of
-downloading official releases, you have the following options:
+Fabric開発者はプロジェクトのソースコードを分散バージョン管理システムの `Git <http://git-scm.com>`_ で管理することが出来ます。
+公式リリースをダウンロードするのではなくFabricの開発状況をGitで追いかける場合、次の選択肢があります。:
 
-* Clone the canonical Git repository, ``git://fabfile.org/fabric.git`` (note
-  that a Web view of this repository can be found at `git.fabfile.org
-  <http://git.fabfile.org>`_)
-* Clone the official Github mirror/collaboration repository,
+* 正式なGitリポジトリ ``git://fabfile.org/fabric.git`` をクローンする
+  （このレポジトリは `git.fabfile.org <http://git.fabfile.org>`_ でWeb上から確認できます）
+* 公式のGithubミラー／コラボレーションレポジトリをクローンする
   ``git://github.com/bitprophet/fabric.git``
-* Make your own fork of the Github repository by making a Github account,
-  visiting `GitHub/bitprophet/fabric <http://github.com/bitprophet/fabric>`_
-  and clicking the "fork" button.
+* Githubアカウントを作って、Githubレポジトリで自分用にforkする
+  `GitHub/bitprophet/fabric <http://github.com/bitprophet/fabric>`_
 
 .. note::
 
-    If you've obtained the Fabric source via source control and plan on
-    updating your checkout in the future, we highly suggest using ``python
-    setup.py develop`` instead -- it will use symbolic links instead of file
-    copies, ensuring that imports of the library or use of the command-line
-    tool will always refer to your checkout.
+   Fabricのソースをバージョン管理ツールから取得して、それを更新しようと考えているなら、代わりに ``python setup.py develop`` を使うことを強く推奨します。
+   -- こうするとファイルをコピーするのではなくシンボリックリンクを使うので、ライブラリをimportしたりコマンドラインツールで呼び出す際に、常に自分のチェックアウトを参照するようになります。
 
-For information on the hows and whys of Fabric development, including which
-branches may be of interest and how you can help out, please see the
-:doc:`development` page.
-
+Fabricの開発について、どのブランチが面白そうかとか、どう貢献できるかも含め、その方法や理由を知りたい場合は :doc:`development` を参照してください。
 
 .. _pypm:
 
 ActivePythonとPyPM
 ==================
 
-Windows users who already have ActiveState's `ActivePython
-<http://www.activestate.com/activepython>`_ distribution installed may find
-Fabric is best installed with its package manager, ``pypm``. Below is example
-output from an installation of Fabric 0.9.0 via ``pypm``::
+すでにActiveStateの `ActivePython <http://www.activestate.com/activepython>`_ を使っているWindowsユーザは、パッケージマネージャとして ``pypm`` を使うのが最適でしょう。
+以下は ``pypm`` 経由でFabric 0.9.0をインストールしたときの出力例です::
 
     C:\> pypm install fabric
     Ready to perform these actions:
