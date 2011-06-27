@@ -1,203 +1,135 @@
-===========
-Development
-===========
+.. -*- coding: utf-8-unix -*- 
 
-The Fabric development team is headed by `Jeff Forcier
-<http://bitprophet.org>`_, aka ``bitprophet``.  However, dozens of other
-developers pitch in by submitting patches and ideas, via individual emails,
-`Redmine <http://code.fabfile.org>`_, the `mailing list
-<http://lists.nongnu.org/mailman/listinfo/fab-user>`_ and `GitHub
-<http://github.com/bitprophet/fabric>`_.
+====
+開発
+====
 
-Get the code
-============
+Fabricの開発チームは ``bitprophet`` こと `Jeff Forcier<http://bitprophet.org>`_ を筆頭としています。
+数十の開発者がパッチとアイディアを個人のメールや `Redmine <http://code.fabfile.org>`_ の
+`mailing list <http://lists.nongnu.org/mailman/listinfo/fab-user>`_ や `GitHub
+<http://github.com/bitprophet/fabric>`_ などから提出し、貢献しています
 
-Please see the :ref:`source-code-checkouts` section of the :doc:`installation`
-page for details on how to obtain Fabric's source code.
+コードの取得
+=========
 
-Contributing
-============
+Fabricのソースコードの取得については　:doc:`installation` ページの :ref:`source-code-checkouts`
+セクションを見てください。
 
-There are a number of ways to get involved with Fabric:
+貢献するには
+=========
 
-* **Use Fabric and send us feedback!** This is both the easiest and arguably
-  the most important way to improve the project -- let us know how you
-  currently use Fabric and how you want to use it. (Please do try to search the
-  `ticket tracker <http://code.fabfile.org>`_ first, though, when submitting
-  feature ideas.)
-* **Report bugs.** Pretty much a special case of the previous item: if you
-  think you've found a bug in Fabric, check on the `Redmine ticket tracker
-  <http://code.fabfile.org>`_ to see if anyone's reported it yet, and if not --
-  file a bug! If possible, try to make sure you can replicate it repeatedly,
-  and let us know the circumstances (what version of Fabric you're using, what
-  platform you're on, and what exactly you were doing when the bug cropped up.)
-* **Submit patches or new features.** See the :ref:`source-code-checkouts`
-  documentation, grab a Git clone of the source, and either email a patch to
-  the mailing list or make your own GitHub fork and post a link to your fork
-  (or a specific commit on a fork) in the appropriate Redmine ticket.
-  While we may not always reply promptly, we do try to make time eventually to
-  inspect all contributions and either incorporate them or explain why we don't
-  feel the change is a good fit.
+Fabricに貢献するには:
 
-Communication
--------------
+* **Fabricを使ってフィードバックを送りましょう！** これはプロジェクトの成長にとって最も簡単で、間違いなく最も重要な方法です。
+  Fabricを使い方と、どのように使いたいかそ知りましょう。(最初に `ticket tracker <http://code.fabfile.org>`_ 
+  を検索してみて見つからなかったらアイディアを送ってください。
 
-If a ticket-tracker ticket exists for a given issue, **please** keep all
-communication in that ticket's comments -- for example, when submitting patches
-via Github, it's easier for us if you leave a note in the ticket **instead of**
-sending a Github pull request.
 
-The core devs receive emails for just about any ticket-tracker activity, so
-additional notices via Github or other means only serve to slow things down.
+* **バグの報告** 前項のかなり特殊なケース：もしFabricにバグを見つけたら　`Redmine ticket tracker
+  <http://code.fabfile.org>`_ を見て、他の誰かが報告してないか調べてください。
+  そして無ければ、バグを提出してください！できれば何度も再現できるか確かめて、その時の環境(使ったFabricのバージョン、プラットフォーム、
+  バグが発生したときに何をしていたか)を知らせてください。
 
-Style
------
+* **パッチや新機能を投稿する** こちらのドキュメント :ref:`source-code-checkouts` をみて、ソースをGitから
+  クローンしてメーリングリストにパッチを送るか、GitHubのfork(もしくはそのforkの特定のコミット)のリンクをRedmineのチケットで
+  投稿してください。
+  すぐに返事を出せないかもしれませんが、最終的にはすべてに目を通します。そして組み込むか、なぜその変更がふさわしくないか説明します。
 
-Fabric tries hard to honor `PEP-8`_, especially (but not limited to!) the
-following:
+コミュニケーション
+------------
 
-* Keep all lines under 80 characters. This goes for the ReST documentation as
-  well as code itself.
+ある問題に関するチケットトラッカーのチケットがあるなら、 **お願いですから** 、そのチケットのコメントとコミュニケーションし続けてください。
+例えばGithubを通してパッチを提出するときは、 **プルリクエストを送る代わりに** 、チケットにノートを残してくれたほうが助かります。
 
-  * Exceptions are made for situations where breaking a long string (such as a
-    string being ``print``-ed from source code, or an especially long URL link
-    in documentation) would be kind of a pain.
+コア開発者はチケットトラッカーのアクティビティを知るためにEメールを使っています。なので、Githubやその他から連絡されても開発が遅くなるだけです。
 
-* Typical Python 4-space (soft-tab) indents. No tabs! No 8 space indents! (No
-  2- or 3-space indents, for that matter!)
-* ``CamelCase`` class names, but ``lowercase_underscore_separated`` everything
-  else.
+スタイル
+------
+
+Fabricは `PEP-8`_ に敬意を評し、特に以下の点に従います。
+
+* すべての行の最大長は79文字とします。ReSTドキュメントも同様に。
+
+  *  例外は、長い文字列がブレーク(例えば文字列が ``print``-ed で始まるソースコードや長いリンクが貼られたドキュメント)
+     されたときに発生し、痛手を負うことになります。
+
+* インデントは4スペース(ソフトタブ)を使いましょう。No タブ！No 8スペース！(2，3スペースとかその他もダメ！)
+
+* クラスの名前には ``CamelCase`` 、その他すべては ``lowercase_underscore_separated`` を使いましょう。
 
 .. _PEP-8: http://www.python.org/dev/peps/pep-0008/
 
-Branching/Repository Layout
-===========================
+ブランチ/リポジトリのレイアウト
+=====================
 
-While Fabric's development methodology isn't set in stone yet, the following
-items detail how we currently organize the Git repository and expect to perform
-merges and so forth. This will be chiefly of interest to those who wish to
-follow a specific Git branch instead of released versions, or to any
-contributors.
+Fabricの開発手法が決定されていない間、Gitリポジトリの整理や、マージのなどを以下の項目で詳細に記します。 
+これはリリースバージョン以外のGitブランチを相手にしてる人だけでなく、どんな貢献者にも興味深いものでしょう。
 
-* We use a combined 'release and feature branches' methodology, where every
-  minor release (e.g. 0.9, 1.0, 1.1, 1.2 etc; see :ref:`releases` below for
-  details on versioning) gets a release branch for bugfixes, and big feature
-  development is performed in a central ``master`` branch and/or in
-  feature-specific feature branches (e.g. a branch for reworking the internals
-  to be threadsafe, or one for overhauling task dependencies, etc.)
-* Releases each get their own release branch, e.g. ``0.9``, ``1.0``, ``1.1``
-  etc, and from these the actual releases are tagged, e.g. ``0.9.3`` or
-  ``1.0.0``.
-* New feature work is typically done in feature branches, whose naming
-  convention is ``<ticket number>-<short-description>``. For example, ticket
-  #61, which concerned adding ``cd`` support to ``get`` and ``put``, was
-  developed in a branch named ``61-add-cd-to-get-put``.
 
-  * These branches are not intended for public use, and may be cleaned out of
-    the repositories periodically. Ideally, no one feature will be in
-    development long enough for its branch to become used in production!
+* 私たちは 'リリースブランチとフィーチャーブランチ' の2つで開発をすすめています。小さいリリースはバグフィックスを目的としたリリースブランチで行われます(例えば、0.9、1.0、1.1、1.1など。バージョンの詳細は以下の :ref:`releases` を参照してください)。機能開発はマスターブランチか専用のブランチ、もしくは両方で行います。(スレッドセーフにするためや、タスクの依存を修正するためなど)
 
-* Completed feature work is merged into the ``master`` branch, and once enough
-  new features are done, a new release branch is created and optionally used to
-  create prerelease versions for testing -- or simply released as-is.
-* While we try our best not to commit broken code or change APIs without
-  warning, as with many other open-source projects we can only have a guarantee
-  of stability in the release branches. Only follow ``master`` (or, even worse,
-  feature branches!) if you're willing to deal with a little pain.
-* Conversely, because we try to keep release branches relatively stable, you
-  may find it easier to use Fabric from a source checkout of a release branch
-  instead of manually upgrading to new released versions. This can provide a
-  decent middle ground between stability and the ability to get bugfixes or
-  backported features easily.
-* The core developers will take care of performing merging/branching on the
-  official repositories. Since Git is Git, contributors may of course do
-  whatever they wish in their own clones/forks.
-* Bugfixes are to be performed on release branches and then merged into
-  ``master`` so that ``master`` is always up-to-date (or nearly so; while it's
-  not mandatory to merge after every bugfix, doing so at least daily is a good
-  idea.)
-* Feature branches should periodically merge in changes from
-  ``master`` so that when it comes time for them to merge back into ``master``
-  things aren't quite as painful.
+* 各リリースは ``0.9``, ``1.0``, ``1.1`` などのブランチがあり、 ``0.9.3`` や ``1.0.0`` のようにタグ付されています。
+
+フィーチャーブランチの名前は ``<ticket number>-<short-description>`` の規則によってつけられます。例えばチケット#61で ``get`` と ``put`` に ``cd`` がサポートされるとすると、ブランチの名前は ``61-add-cd-to-get-put`` となります。
+
+  * これらのブランチは実用を意図していませんのでリポジトリから定期的に消されることがあります。理想的には、実用された時点で消されるべきです！
+
+* 新機能がマスターブランチにマージされた時点で、新しいリリースブランチがテスト用にリリースブランチとして作られることがあります。単に、そのままリリースされることもあります。
+
+* バグのあるコードをコミットしたり、いきなりAPIを変えたりしないようベストを尽くしています。しかし、他の多くのオープンソース・プロジェクトと同じく、リリースブランチの安定性しか保証できません。多少痛手を負っても構わないなら、 ``master`` (それともフィーチャーブランチ!)を使ってください。
+
+* リリースブランチは比較的安定させています。手動でバージョンアップするより、リリースブランチをチェックアウトすることをオススメします。バグフィックスやバックポートを簡単に手にいれ、能力と安定性のイイトコ取りができます。
+
+* コア開発者は公式リポジトリでのマージ/ブランチを慎重に行います。GitがGitである限り、コントリビュータは自身のクローン/フォークで何でもできます。
+
+* バグフィックスはリリースブランチで実行されてから ``master`` にマージされるので、 ``master`` はいつも最新です。(すべてのバグフィックスの後にマージするは義務ではありません。しかし毎日そうするのはいいアイディアです)。
+
+* フィーチャーブランチを ``master`` にマージするときに苦労しないためにも、変更点は定期的にマージすべきです。
 
 .. _releases:
 
-Releases
-========
+リリース
+======
 
-Fabric tries to follow open-source standards and conventions in its release
-tagging, including typical version numbers such as 2.0, 1.2.5, or
-1.2b1. Each release will be marked as a tag in the Git repositories, and
-are broken down as follows:
+Fabrciのリリースのタグ付けはオープンソースの規格と慣例にしたがっています。例えば2.0、1.2.5や1.2b1などの標準的なバージョン番号を含みます。それぞれのリリースはGitリポジトリーのタグを付けられ、以下の通りに分けられます:
 
-Major
------
+メジャー
+------
 
-Major releases update the first number, e.g. going from 0.9 to 1.0, and
-indicate that the software has reached some very large milestone.
+先頭の番号が更新されることをメジャーリリースといいます(例えば0.9が1.0になること)。これはソフトウェアが大きい節目に達したことを示しています。
 
-For example, the 1.0 release signified a commitment to a medium to long term
-API and some significant backwards incompatible (compared to the 0.9 series)
-features. Version 2.0 might indicate a rewrite using a new underlying network
-technology or an overhaul to be more object-oriented.
+例えば1.0リリースでは、長期的に使われるAPIと、(0.9シリーズと互換性のない)重要な機能がコミットされました。 バージョン2.0では、新しいネットワーク技術が使われるようになるか、よりオブジェクト指向になるでしょう。
 
-Major releases will often be backwards-incompatible with the previous line of
-development, though this is not a requirement, just a usual happenstance.
-Users should expect to have to make at least some changes to their fabfiles
-when switching between major versions.
+メジャーリリースに後方互換性が無いのはよくあることです。必要条件ではなくとも当然の理です。
+大抵、メジャーバージョンを変えるとfabfilesへの変更も必要になります。
 
-Minor
------
+マイナー
+------
 
-Minor releases, such as moving from 1.0 to 1.1, typically mean that one or more
-new, large features has been added. They are also sometimes used to mark off
-the fact that a lot of bug fixes or small feature modifications have occurred
-since the previous minor release. (And, naturally, some of them will involve
-both at the same time.)
+マイナーリリースは2番目の数字が変更されます(例えば1.0から1.1)。通常は新機能の追加を意味します。バグフィックスや機能修正が多くあると変更されることもあります。(両方同時に行われることもあります)
 
-These releases are guaranteed to be backwards-compatible with all other
-releases containing the same major version number, so a fabfile that works
-with 1.0 should also work fine with 1.1 or even 1.9.
+すべてのマイナーリリースは同じメジャーバージョン上で後方互換性があます。1.0で動作するfabfileは全く同じように1.1や1.9でも動作します。
 
-Bugfix/tertiary
----------------
+バグフィックス
+----------
 
-The third and final part of version numbers, such as the '3' in 1.0.3,
-generally indicate a release containing one or more bugfixes, although minor
-feature modifications may (rarely) occur.
+バージョン番号の3番目はバグフィックスがあると変更されます(例えば1.0.3の'3')、小さな機能変更があったときも変更されるかもしれません(めったに無いでしょう)。
 
-This third number is sometimes omitted for the first major or minor release in
-a series, e.g. 1.2 or 2.0, and in these cases it can be considered an implicit
-zero (e.g. 2.0.0).
+メジャー、マイナーリリースの最初のバージョン番号ではこの3番目の数字が省略されます(例えば、1.2や2.0)。この場合暗黙のゼロがあります(例えば、2.0.0)。
 
 .. note::
 
-    The 0.9 series of development included more significant feature work than
-    is typically found in tertiary releases; from 1.0 onwards a more
-    traditional approach, as per the above, is used.
+    0.9シリーズではバージョン番号の3番目の変更に、今よりも重要な機能実装を含んでいました。1.0からは上記の通り、一般的なアプローチを使っています。
 
+旧リリースのサポート
+==============
 
-Support of older releases
-=========================
+メジャー、マイナーリリースがあったからといって、それ以前の開発が終わるわけではありません。
 
-Major and minor releases do not mark the end of the previous line or lines of
-development:
+* 最新とその1つ前のマイナーリリースブランチが重要なバグフィックスを受け取り続けるでしょう。例えば、1.1が最新のマイナーリリースであれば、それと1.0がバグフィックスを受けとります(0.9より前は無関係です)。1.2が出ると、それと1.1が対象になります。
 
-* The two most recent minor release branches will continue to receive critical
-  bugfixes. For example, if 1.1 were the latest minor release, it and 1.0 would
-  get bugfixes, but not 0.9 or earlier; and once 1.2 came out, this window
-  would then only extend back to 1.1.
-* Depending on the nature of bugs found and the difficulty in backporting them,
-  older release lines may also continue to get bugfixes -- but there's no
-  longer a guarantee of any kind. Thus, if a bug were found in 1.1 that
-  affected 0.9 and could be easily applied, a new 0.9.x version *might* be
-  released.
-* This policy may change in the future to accommodate more branches, depending
-  on development speed.
+* 発見されたバグの修正が困難な場合は、より古いリリースがバグフィックスの対象になることもあります。そのリリースの保証が一切無くなります。1.1で見つかったバグの原因が0.9だとすると、すぐに修正されるべきならバージョン0.9.xが *ほぼ間違いなく* リリースされるでしょう。
 
-We hope that this policy will allow us to have a rapid minor release cycle (and
-thus keep new features coming out frequently) without causing users to feel too
-much pressure to upgrade right away. At the same time, the backwards
-compatibility guarantee means that users should still feel comfortable
-upgrading to the next minor release in order to stay within this sliding
-support window.
+* 将来的にこのポリシーは変更されるかもしれません。開発スピードが上がると、より多くのブランチに対応する必要がでてくるからです。
+
+私たちは、このポリシーによって高速なマイナーリリースサイクルを実現し、新機能を頻繁に実装したいと思っています(ユーザがアップデートにプレッシャーを感じすぎない程度に)。同時に、後方互換性によってマイナーアップグレードが簡単に行えるべきです(ユーザがこのサポートページに留まり続けるためにも)。
